@@ -1,4 +1,42 @@
 {
   "name": "hugo.exec.sh",
-  "version": "1.0.0"
+  "description": "My Ghost :pencil2::ghost: blog theme",
+  "version": "0.0.0",
+  "engines": {
+    "node": ">= 6.0.0"
+  },
+  "author": "Hugo Freire <hfreire@exec.sh>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hfreire/hugo.exec.sh.git"
+  },
+  "bugs": {
+    "url": "https://github.com/hfreire/hugo.exec.sh/issues"
+  },
+  "homepage": "https://github.com/hfreire/hugo.exec.sh#readme",
+  "devDependencies": {
+    "pre-git": "3.17.0",
+    "semantic-release": "7.0.2"
+  },
+  "greenkeeper": {
+    "ignore": [
+      "semantic-release"
+    ]
+  },
+  "config": {
+    "pre-git": {
+      "commit-msg": "conventional",
+      "allow-untracked-files": true
+    }
+  },
+  "release": {
+    "getLastRelease": "last-release-github",
+    "analyzeCommits": "simple-commit-message"
+  },
+  "scripts": {
+    "commit": "./node_modules/.bin/commit-wizard",
+    "clean": "rm -rf {coverage,tmp}",
+    "semantic-release": "./node_modules/.bin/semantic-release pre && node_modules/.bin/semantic-release post"
+  }
 }
