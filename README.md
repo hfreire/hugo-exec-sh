@@ -5,7 +5,7 @@
 <p align="center"><img src="share/github/overview.png" width="720"></p>
 
 ### Features
-* Simple and lightweight theme for [Ghost](https://github.com/TryGhost/Ghost) publishing platform :white_check_mark:
+* Simple and :dizzy: lightweight theme for :ghost: [Ghost](https://github.com/TryGhost/Ghost) publishing platform :white_check_mark:
 
 ### How to contribute
 You can contribute either with code (e.g., new features, bug fixes and documentation) or by [donating 5 EUR](https://paypal.me/hfreire/5). You can read the [contributing guidelines](CONTRIBUTING.md) for instructions on how to contribute with code. 

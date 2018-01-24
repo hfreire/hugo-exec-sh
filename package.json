@@ -1,6 +1,6 @@
 {
   "name": "hugo.exec.sh",
-  "description": "My Ghost :pencil2::ghost: blog theme",
+  "description": "My Ghost blog theme",
   "version": "0.0.0",
   "engines": {
     "node": ">= 6.0.0"
