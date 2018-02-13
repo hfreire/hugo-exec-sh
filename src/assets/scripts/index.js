@@ -17,7 +17,7 @@
 
   $document.ready(function () {
 
-    var $postContent = $('.post-content')
+    var $postContent = $('.post-contentb')
     $postContent.fitVids()
 
     $('.scroll-down').arctic_scroll()
@@ -26,7 +26,6 @@
       e.preventDefault()
       $('body').toggleClass('nav-opened nav-closed')
     })
-
   })
 
   // Arctic Scroll by Paul Adam Davis

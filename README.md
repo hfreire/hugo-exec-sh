@@ -2,7 +2,7 @@
 
 > Ghost theme for personal blogging and note-taking
 
-<p align="center"><img src="share/github/overview.png" width="720"></p>
+<p align="center"><img src="share/github/overview.gif" width="720"></p>
 
 ### Features
 * Simple and :dizzy: lightweight theme for :ghost: [Ghost](https://github.com/TryGhost/Ghost) publishing platform :white_check_mark:

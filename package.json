@@ -25,6 +25,7 @@
     ]
   },
   "config": {
+    "posts_per_page": 15,
     "pre-git": {
       "commit-msg": "conventional",
       "allow-untracked-files": true
@@ -36,7 +37,6 @@
   },
   "scripts": {
     "commit": "./node_modules/.bin/commit-wizard",
-    "clean": "rm -rf {coverage,tmp}",
     "semantic-release": "./node_modules/.bin/semantic-release pre && node_modules/.bin/semantic-release post"
   }
 }
