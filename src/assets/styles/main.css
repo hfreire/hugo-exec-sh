@@ -489,8 +489,7 @@ button {
 
 .main-header-second-title {
   margin: 0;
-  font-size: 3rem;
-  font-weight: 400;
+  font-size: 1.6rem;
   letter-spacing: 0.01rem;
   color: rgba(255, 255, 255, 0.8);
 
@@ -507,7 +506,7 @@ button {
   right: -15px;
   /* Remove display: inline-block if not required to be on the same line as text etc */
   display: inline-block;
-  background-color: #d733ff; /*#00d900;*/
+  background-color: #00d900;
   vertical-align: top;
   width: 10px;
   /* Set height to the line height of .text */
@@ -1047,7 +1046,7 @@ footer a:hover {
   }
 
   .main-header-second-title {
-    font-size: 2rem;
+    font-size: 1.6rem;
   }
 
   .main-header-description {
