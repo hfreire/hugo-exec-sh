@@ -1,4 +1,4 @@
-# My Ghost :pencil2::ghost: blog theme
+# :pencil2: My Ghost :ghost: blog theme
 
 > Ghost theme for personal blogging and note-taking
 
