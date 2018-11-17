@@ -11,7 +11,7 @@ git clone https://github.com/my-github-username/hugo.exec.sh
 
 Change current directory
 ```
-cd get-me-date
+cd hugo.exec.sh
 ```
 
 Install NPM dependencies
