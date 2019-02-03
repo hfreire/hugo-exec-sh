@@ -1,11 +1,12 @@
-# :pencil2: My Ghost :ghost: blog theme
+#  My personal website for blogging and :pencil2: note-taking 
 
-> Ghost theme for personal blogging and note-taking
+> Uses Ghost blogging platform for publishing and managing content online
 
 <p align="center"><img src="share/github/overview.gif" width="720"></p>
 
 ### Features
-* Simple and :dizzy: lightweight theme for :ghost: [Ghost](https://github.com/TryGhost/Ghost) publishing platform :white_check_mark:
+* :ghost: Ghost blogging platform  [Ghost](https://github.com/TryGhost/Ghost) publishing platform :white_check_mark:
+* Simple and :dizzy: lightweight theme :white_check_mark:
 
 ### How to contribute
 You can contribute either with code (e.g., new features, bug fixes and documentation) or by [donating 5 EUR](https://paypal.me/hfreire/5). You can read the [contributing guidelines](CONTRIBUTING.md) for instructions on how to contribute with code. 
