@@ -5,7 +5,7 @@
 [![Known Vulnerabilities](https://snyk.io/test/github/hfreire/hugo-exec-sh/badge.svg)](https://snyk.io/test/github/hfreire/hugo-exec-sh)
 [![](https://img.shields.io/github/release/hfreire/hugo-exec-sh.svg)](https://github.com/hfreire/hugo-exec-sh/releases)
 [![Docker Stars](https://img.shields.io/docker/stars/hfreire/hugo-exec-sh.svg)](https://hub.docker.com/r/hfreire/hugo-exec-sh/)
-[![Docker Pulls](https://img.shields.io/docker/pulls/hfreire/hugo-exec-sh.svg)](https://hub.docker.com/r/hfreire/hugo-exec-sh/)
+[![Docker Pulls](https://img.shields.io/docker/pulls/hfreire/hugo-exec-sh.svg)](https://hub.docker.com/r/hfreire/hugo-exec-sh/) [![Greenkeeper badge](https://badges.greenkeeper.io/hfreire/hugo-exec-sh.svg)](https://greenkeeper.io/)
 
 > Uses Ghost blogging platform for publishing and managing content online
 
