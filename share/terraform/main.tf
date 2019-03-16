@@ -22,7 +22,7 @@ data "template_file" "container_definitions" {
   }
 }
 
-module "service" {
+module "hugo-exec-sh" {
   source = "github.com/antifragile-systems/antifragile-service"
 
   name                  = "${var.name}"
@@ -33,4 +33,5 @@ module "service" {
   api_quota_offset      = 0
   api_quota_period      = "DAY"
   aws_region            = "${var.aws_region}"
+  health_check_path     = "/"
 }

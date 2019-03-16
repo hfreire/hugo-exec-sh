@@ -1,5 +1,5 @@
 {
-  "name": "hugo.exec.sh",
+  "name": "hugo-exec-sh",
   "description": "My Ghost blog theme",
   "version": "0.0.0",
   "engines": {
@@ -9,12 +9,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hfreire/hugo.exec.sh.git"
+    "url": "git+https://github.com/hfreire/hugo-exec-sh.git"
   },
   "bugs": {
-    "url": "https://github.com/hfreire/hugo.exec.sh/issues"
+    "url": "https://github.com/hfreire/hugo-exec-sh/issues"
   },
-  "homepage": "https://github.com/hfreire/hugo.exec.sh#readme",
+  "homepage": "https://github.com/hfreire/hugo-exec-sh#readme",
   "devDependencies": {
     "coveralls": "3.0.2",
     "eslint": "5.13.0",

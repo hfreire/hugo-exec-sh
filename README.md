@@ -1,11 +1,11 @@
 #  My personal website for blogging and :pencil2: note-taking 
 
-[![Build Status](https://travis-ci.org/hfreire/hugo.exec.sh.svg?branch=master)](https://travis-ci.org/hfreire/hugo.exec.sh)
-[![Coverage Status](https://coveralls.io/repos/github/hfreire/hugo.exec.sh/badge.svg?branch=master)](https://coveralls.io/github/hfreire/hugo.exec.sh?branch=master)
-[![Known Vulnerabilities](https://snyk.io/test/github/hfreire/hugo.exec.sh/badge.svg)](https://snyk.io/test/github/hfreire/hugo.exec.sh)
-[![](https://img.shields.io/github/release/hfreire/hugo.exec.sh.svg)](https://github.com/hfreire/hugo.exec.sh/releases)
-[![Docker Stars](https://img.shields.io/docker/stars/hfreire/hugo.exec.sh.svg)](https://hub.docker.com/r/hfreire/hugo.exec.sh/)
-[![Docker Pulls](https://img.shields.io/docker/pulls/hfreire/hugo.exec.sh.svg)](https://hub.docker.com/r/hfreire/hugo.exec.sh/)
+[![Build Status](https://travis-ci.org/hfreire/hugo-exec-sh.svg?branch=master)](https://travis-ci.org/hfreire/hugo-exec-sh)
+[![Coverage Status](https://coveralls.io/repos/github/hfreire/hugo-exec-sh/badge.svg?branch=master)](https://coveralls.io/github/hfreire/hugo-exec-sh?branch=master)
+[![Known Vulnerabilities](https://snyk.io/test/github/hfreire/hugo-exec-sh/badge.svg)](https://snyk.io/test/github/hfreire/hugo-exec-sh)
+[![](https://img.shields.io/github/release/hfreire/hugo-exec-sh.svg)](https://github.com/hfreire/hugo-exec-sh/releases)
+[![Docker Stars](https://img.shields.io/docker/stars/hfreire/hugo-exec-sh.svg)](https://hub.docker.com/r/hfreire/hugo-exec-sh/)
+[![Docker Pulls](https://img.shields.io/docker/pulls/hfreire/hugo-exec-sh.svg)](https://hub.docker.com/r/hfreire/hugo-exec-sh/)
 
 > Uses Ghost blogging platform for publishing and managing content online
 
@@ -23,18 +23,18 @@ Using it in your terminal requires [Docker](https://www.docker.com) installed in
 ##### Run the Docker image in a container 
 Detach from the container and expose port `5302`.
 ```
-docker run -d -p "5302:3000" hfreire/hugo.exec.sh
+docker run -d -p "5302:3000" hfreire/hugo-exec-sh
 ```
 
 ### How to build
 ##### Clone the GitHub repo
 ```
-git clone https://github.com/hfreire/hugo.exec.sh.git
+git clone https://github.com/hfreire/hugo-exec-sh.git
 ```
 
 ##### Change current directory
 ```
-cd hugo.exec.sh
+cd hugo-exec-sh
 ```
 
 ##### Run the NPM script that will build the Docker image
@@ -49,12 +49,12 @@ Deploying it from your terminal requires [terraform](https://www.terraform.io) i
 
 ##### Clone the GitHub repo
 ```
-git clone https://github.com/hfreire/hugo.exec.sh.git
+git clone https://github.com/hfreire/hugo-exec-sh.git
 ```
 
 ##### Change current directory
 ```
-cd hugo.exec.sh
+cd hugo-exec-sh
 ```
 
 ##### Run the NPM script that will deploy all functions

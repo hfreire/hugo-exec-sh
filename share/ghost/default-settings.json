@@ -99,7 +99,7 @@
   },
   "theme": {
     "active_theme": {
-      "defaultValue": "hugo.exec.sh"
+      "defaultValue": "hugo-exec-sh"
     }
   },
   "app": {

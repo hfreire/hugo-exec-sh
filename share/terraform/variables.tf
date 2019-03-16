@@ -5,7 +5,7 @@ variable "infrastructure_name" {
 variable "docker_repo" {}
 
 variable "name" {
-  default = "hugo.exec.sh"
+  default = "hugo-exec-sh"
 }
 
 variable "version" {}
