@@ -1,6 +1,6 @@
 {
   "name": "hugo-exec-sh",
-  "description": "My Ghost blog theme",
+  "description": "My personal website for blogging and note-taking",
   "version": "0.0.0",
   "engines": {
     "node": ">= 6.0.0"
