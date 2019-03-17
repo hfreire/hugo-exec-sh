@@ -15,7 +15,12 @@
     "entryPoint": [],
     "command": [],
     "environment": [],
-    "mountPoints": [],
+    "mountPoints": [
+      {
+        "sourceVolume": "${name}",
+        "containerPath": "/var/lib/ghost/content"
+      }
+    ],
     "volumesFrom": [],
     "logConfiguration": {
       "logDriver": "awslogs",
