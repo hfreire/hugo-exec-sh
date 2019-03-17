@@ -25,13 +25,12 @@ data "template_file" "container_definitions" {
 module "hugo-exec-sh" {
   source = "github.com/antifragile-systems/antifragile-service"
 
-  name                  = "${var.name}"
-  domain_name           = "${var.domain_name}"
-  container_definitions = "${data.template_file.container_definitions.rendered}"
-  api_keys              = "${var.api_keys}"
-  api_quota_limit       = 1000
-  api_quota_offset      = 0
-  api_quota_period      = "DAY"
-  aws_region            = "${var.aws_region}"
-  health_check_path     = "/"
+  name                             = "${var.name}"
+  container_definitions            = "${data.template_file.container_definitions.rendered}"
+  aws_region                       = "${var.aws_region}"
+  health_check_path                = "/"
+  health_check_path_preappend_name = false
+
+  cdn_enabled = 1
+  cdn_cnames  = "${var.cdn_cnames}"
 }

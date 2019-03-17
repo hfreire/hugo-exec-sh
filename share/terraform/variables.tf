@@ -10,13 +10,17 @@ variable "name" {
 
 variable "version" {}
 
-variable "domain_name" {}
 
 variable "aws_region" {
   default = "eu-west-1"
 }
 
 variable "api_keys" {
+  type    = "list"
+  default = [ ]
+}
+
+variable "cdn_cnames" {
   type    = "list"
   default = [ ]
 }
