@@ -24,3 +24,7 @@ variable "cdn_cnames" {
   type    = "list"
   default = [ ]
 }
+
+variable "cdn_redirect_cname" {
+  default = ""
+}
