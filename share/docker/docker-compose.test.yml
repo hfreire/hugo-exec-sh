@@ -2,5 +2,7 @@ version: "3.3"
 
 services:
   sut:
-    image: ${IMAGE_NAME}
+    build:
+      context: ../../
+      dockerfile: share/docker/Dockerfile
     entrypoint: ./test.sh
