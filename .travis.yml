@@ -33,7 +33,8 @@ before_script:
 script:
   - |
     npm test && \
-    npm run build
+    npm run build && \
+    npm run docker:test
 after_success:
   - npm run coveralls
   - npm run semantic-release
