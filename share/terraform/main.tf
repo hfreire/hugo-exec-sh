@@ -31,7 +31,7 @@ module "hugo-exec-sh" {
   health_check_path                = "/"
   health_check_path_preappend_name = false
 
-  cdn_enabled        = true
+  cdn_enabled        = 1
   cdn_cnames         = "${var.cdn_cnames}"
   cdn_redirect_cname = "${var.cdn_redirect_cname}"
 }
