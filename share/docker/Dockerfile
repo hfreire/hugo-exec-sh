@@ -20,7 +20,7 @@ RUN apk --no-cache add \
     netcat-openbsd
 
 # Copy app source
-COPY --chown=node:node src $GHOST_INSTALL/content.orig/themes/$NAME/
+COPY --chown=node:node src $GHOST_INSTALL/current/content/themes/$NAME/
 COPY --chown=node:node share/ghost/icon.png $GHOST_INSTALL/content.orig/images/2019/01/icon.png
 COPY --chown=node:node share/ghost/logo.png $GHOST_INSTALL/content.orig/images/2019/01/logo.png
 COPY --chown=node:node share/ghost/default-settings.json $GHOST_INSTALL/current/core/server/data/schema/default-settings.json
@@ -28,6 +28,7 @@ COPY --chown=node:node share/docker/start.sh start.sh
 COPY --chown=node:node share/docker/test.sh test.sh
 
 RUN cd "$GHOST_INSTALL"; \
+    su-exec node ln -s $GHOST_INSTALL/current/content/themes/$NAME $GHOST_INSTALL/content.orig/themes/$NAME; \
     su-exec node ghost config --ip 0.0.0.0 --port 3000 --log stdout
 
 EXPOSE 3000

@@ -6,12 +6,12 @@ You can read more about forking a GitHub repo [here](https://help.github.com/art
 
 Clone the GitHub repo
 ```
-git clone https://github.com/my-github-username/hugo.exec.sh
+git clone https://github.com/my-github-username/hugo-exec-sh
 ```
 
 Change current directory
 ```
-cd hugo.exec.sh
+cd hugo-exec-sh
 ```
 
 Install NPM dependencies
@@ -24,7 +24,7 @@ It's generally a good idea to pull upstream changes and merge them with your for
 
 Add remote upstream
 ```
-git remote add upstream https://github.com/hfreire/hugo.exec.sh
+git remote add upstream https://github.com/hfreire/hugo-exec-sh
 ```
 
 Fetch from remote upstream master branch
@@ -43,7 +43,7 @@ npm install && npm prune
 ```
 
 ### How to know what to contribute
-The list of outstanding feature requests and bugs can be found in the [GitHub issue tracker](https://github.com/hfreire/hugo.exec.sh/issues) of this repo. Please, feel free to propose features or report bugs that are not there.
+The list of outstanding feature requests and bugs can be found in the [GitHub issue tracker](https://github.com/hfreire/hugo-exec-sh/issues) of this repo. Please, feel free to propose features or report bugs that are not there.
 
 ### How to style the code
 With the exception rules from [eslint-config-hfreire](https://github.com/hfreire/eslint-config-hfreire), this repo follows the [JavaScript Standard Style](https://standardjs.com/) rules.
@@ -75,7 +75,7 @@ You can read more about creating a GitHub pull request from a fork [here](https:
 ### How to get your pull request accepted
 Every pull request is welcomed, but it's important, as well, to have maintainable code and avoid regression bugs while adding features or fixing other bugs. 
 
-Once you generate a pull request, GitHub and third-party apps will verify if the changes are suitable to be merged with upstream. [Travis](https://travis-ci.org/hfreire/hugo.exec.sh) will verify your changes for style guide violations and failing test cases, while, [Coveralls](https://coveralls.io/github/hfreire/hugo.exec.sh) will verify the coverage of the automated test cases against the code.
+Once you generate a pull request, GitHub and third-party apps will verify if the changes are suitable to be merged with upstream. [Travis](https://travis-ci.org/hfreire/hugo-exec-sh) will verify your changes for style guide violations and failing test cases, while, [Coveralls](https://coveralls.io/github/hfreire/hugo-exec-sh) will verify the coverage of the automated test cases against the code.
 
 You are encouraged to verify your changes by testing the code locally.
 
