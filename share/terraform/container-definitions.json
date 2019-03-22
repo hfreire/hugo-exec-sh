@@ -14,7 +14,12 @@
     "essential": true,
     "entryPoint": [],
     "command": [],
-    "environment": [],
+    "environment": [
+      {
+        "name": "url",
+        "value": "${url}"
+      }
+    ],
     "mountPoints": [
       {
         "sourceVolume": "${name}",

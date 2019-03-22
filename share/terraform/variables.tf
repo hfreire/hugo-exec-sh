@@ -28,3 +28,7 @@ variable "cdn_cnames" {
 variable "cdn_redirect_cname" {
   default = ""
 }
+
+variable "url" {
+  default = ""
+}

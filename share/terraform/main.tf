@@ -19,6 +19,7 @@ data "template_file" "container_definitions" {
   vars {
     name  = "${var.name}"
     image = "${var.docker_repo}/${var.name}:${var.version}"
+    url   = "${var.url}"
   }
 }
 
