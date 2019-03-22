@@ -28,7 +28,7 @@ COPY --chown=node:node share/docker/start.sh start.sh
 COPY --chown=node:node share/docker/test.sh test.sh
 
 RUN cd "$GHOST_INSTALL"; \
-    su-exec node ghost config --ip 0.0.0.0 --port 3000
+    su-exec node ghost config --ip 0.0.0.0 --port 3000 --log stdout
 
 EXPOSE 3000
 
