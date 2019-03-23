@@ -19,6 +19,7 @@ data "template_file" "container_definitions" {
   vars {
     name  = "${var.name}"
     image = "${var.docker_repo}/${var.name}:${var.version}"
+
     url   = "${var.url}"
   }
 }
@@ -27,8 +28,11 @@ module "hugo-exec-sh" {
   source = "github.com/antifragile-systems/antifragile-service"
 
   name                             = "${var.name}"
-  container_definitions            = "${data.template_file.container_definitions.rendered}"
   aws_region                       = "${var.aws_region}"
+
+  service_desired_count = "${var.service_desired_count}"
+
+  container_definitions            = "${data.template_file.container_definitions.rendered}"
   health_check_path                = "/"
   health_check_path_preappend_name = false
 

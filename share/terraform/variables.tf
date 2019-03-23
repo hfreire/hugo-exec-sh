@@ -15,6 +15,10 @@ variable "aws_region" {
   default = "eu-west-1"
 }
 
+variable "service_desired_count" {
+  default = 3
+}
+
 variable "api_keys" {
   type    = "list"
   default = [ ]
