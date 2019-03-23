@@ -18,6 +18,10 @@
       {
         "name": "url",
         "value": "${url}"
+      },
+      {
+        "name": "forwarded_proto_header",
+        "value": "cloudfront-forwarded-proto"
       }
     ],
     "mountPoints": [

@@ -1,0 +1,29 @@
+diff --git a/current/core/server/web/parent-app.js b/current/core/server/web/parent-app.js
+index 9aef6ece4..502cd9b7a 100644
+--- a/current/core/server/web/parent-app.js
++++ b/current/core/server/web/parent-app.js
+@@ -18,6 +18,24 @@ module.exports = function setupParentApp() {
+
+     // ## Global settings
+
++    // If we are behind a proxy that uses a non-standard forwarded proto header,
++    // we should replace the X-Forwarded-Proto with its value
++    var forwardedProtoHeader = config.get('forwarded_proto_header');
++    if (forwardedProtoHeader) {
++        parentApp.use(function (req, res, next) {
++            req.headers['x-forwarded-proto'] = req.headers[forwardedProtoHeader] ?
++                req.headers[forwardedProtoHeader] :
++                req.headers['x-forwarded-proto'];
++
++            next();
++        });
++    }
++
++    // Make a ping endpoint available that always returns 200 OK
++    parentApp.get('/ping', function (req, res) {
++        res.send({answer: 'pong'});
++    });
++
+     // Make sure 'req.secure' is valid for proxied requests
+     // (X-Forwarded-Proto header will be checked, if present)
+     parentApp.enable('trust proxy');
