@@ -20,6 +20,7 @@ RUN apk --no-cache add \
     netcat-openbsd
 
 # Copy app source
+COPY --chown=node:node package.json current/content/themes/$NAME/package.json
 COPY --chown=node:node src current/content/themes/$NAME/
 COPY --chown=node:node share/ghost/ghost.patch ghost.patch
 COPY --chown=node:node share/ghost/icon.png content.orig/images/2019/01/icon.png
