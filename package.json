@@ -85,6 +85,6 @@
     "build": "npm run docker:build",
     "push": "npm run docker:push",
     "deploy": "npm run terraform:deploy",
-    "start": "node src/app.js"
+    "develop": "docker run -p 5302:3000 -e NODE_ENV=development -e url=http://localhost:5302 -v $(pwd)/src/:/var/lib/ghost/content/themes/hugo-exec-sh/ hfreire/hugo-exec-sh"
   }
 }

@@ -8,6 +8,9 @@
     },
     "notifications": {
       "defaultValue": "[]"
+    },
+    "session_secret": {
+      "defaultValue": null
     }
   },
   "blog": {
@@ -70,7 +73,15 @@
       }
     },
     "amp": {
-      "defaultValue": "true"
+      "defaultValue": "true",
+      "validations": {
+        "isIn": [
+          [
+            "true",
+            "false"
+          ]
+        ]
+      }
     },
     "ghost_head": {
       "defaultValue": "<!-- Google Analytics -->\n<script>\n  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){\n  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),\n  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)\n  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');\n\n  ga('create', 'UA-26338127-1', 'auto');\n  ga('send', 'pageview');\n\n</script>"
@@ -85,7 +96,7 @@
       "defaultValue": ""
     },
     "labs": {
-      "defaultValue": "{\"publicAPI\": true}"
+      "defaultValue": "{}"
     },
     "navigation": {
       "defaultValue": "[{\"label\":\"Home\", \"url\":\"/\"}]"
@@ -112,13 +123,35 @@
   },
   "private": {
     "is_private": {
-      "defaultValue": "false"
+      "defaultValue": "false",
+      "validations": {
+        "isIn": [
+          [
+            "true",
+            "false"
+          ]
+        ]
+      }
     },
     "password": {
       "defaultValue": ""
     },
     "public_hash": {
       "defaultValue": null
+    }
+  },
+  "members": {
+    "members_public_key": {
+      "defaultValue": null
+    },
+    "members_private_key": {
+      "defaultValue": null
+    },
+    "members_session_secret": {
+      "defaultValue": null
+    },
+    "members_subscription_settings": {
+      "defaultValue": "{\"isPaid\":false,\"paymentProcessors\":[{\"adapter\":\"stripe\",\"config\":{\"secret_token\":\"\",\"public_token\":\"\",\"product\":{\"name\":\"Ghost Subscription\"},\"plans\":[{\"name\":\"Monthly\",\"currency\":\"usd\",\"interval\":\"month\",\"amount\":\"\"},{\"name\":\"Yearly\",\"currency\":\"usd\",\"interval\":\"year\",\"amount\":\"\"}]}}]}"
     }
   }
 }
