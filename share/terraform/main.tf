@@ -20,7 +20,11 @@ data "template_file" "container_definitions" {
     name  = "${var.name}"
     image = "${var.docker_repo}/${var.name}:${var.version}"
 
-    url = "${var.url}"
+    url                       = "${var.url}"
+    mail__from                = "${var.mail__from}"
+    mail__options__host       = "${var.mail__options__host}"
+    mail__options__auth__user = "${var.mail__options__auth__user}"
+    mail__options__auth__pass = "${var.mail__options__auth__pass}"
   }
 }
 

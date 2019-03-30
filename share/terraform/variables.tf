@@ -36,3 +36,19 @@ variable "cdn_redirect_cname" {
 variable "url" {
   default = ""
 }
+
+variable "mail__from" {
+  default = ""
+}
+
+variable "mail__options__host" {
+  default = ""
+}
+
+variable "mail__options__auth__user" {
+  default = ""
+}
+
+variable "mail__options__auth__pass" {
+  default = ""
+}

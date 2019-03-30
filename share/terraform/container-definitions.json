@@ -16,12 +16,40 @@
     "command": [],
     "environment": [
       {
+        "name": "forwarded_proto_header",
+        "value": "cloudfront-forwarded-proto"
+      },
+      {
         "name": "url",
         "value": "${url}"
       },
       {
-        "name": "forwarded_proto_header",
-        "value": "cloudfront-forwarded-proto"
+        "name": "mail__from",
+        "value": "${mail__from}"
+      },
+      {
+        "name": "mail__transport",
+        "value": "SMTP"
+      },
+      {
+        "name": "mail__options__host",
+        "value": "${mail__options__host}"
+      },
+      {
+        "name": "mail__options__port",
+        "value": "465"
+      },
+      {
+        "name": "mail__options__service",
+        "value": "SES"
+      },
+      {
+        "name": "mail__options__auth__user",
+        "value": "${mail__options__auth__user}"
+      },
+      {
+        "name": "mail__options__auth__pass",
+        "value": "${mail__options__auth__pass}"
       }
     ],
     "mountPoints": [
