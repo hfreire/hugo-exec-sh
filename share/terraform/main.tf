@@ -39,7 +39,9 @@ module "hugo-exec-sh" {
   container_definitions            = "${data.template_file.container_definitions.rendered}"
   health_check_path_preappend_name = false
 
-  cdn_enabled        = 1
-  cdn_cnames         = "${var.cdn_cnames}"
-  cdn_redirect_cname = "${var.cdn_redirect_cname}"
+  cdn_enabled                        = 1
+  cdn_certificate_validation_enabled = 0
+  cdn_hostname                       = "${var.cdn_hostname}"
+  cdn_hostname_aliases               = "${var.cdn_hostname_aliases}"
+  cdn_hostname_redirects             = "${var.cdn_hostname_redirects}"
 }
