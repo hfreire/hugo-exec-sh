@@ -1,0 +1,15 @@
+{
+  "name": "hugo-exec-sh",
+  "description": "",
+  "version": "0.0.0",
+  "engines": {
+    "ghost-api": "v2"
+  },
+  "author": {
+    "name": "Hugo Freire",
+    "email": "hugo@exec.sh"
+  },
+  "config": {
+    "posts_per_page": 15
+  }
+}

@@ -13,6 +13,11 @@ ENV VERSION_COMMIT $VERSION_COMMIT
 ARG VERSION_BUILD_DATE
 ENV VERSION_BUILD_DATE $VERSION_BUILD_DATE
 
+# Create app directory
+RUN mkdir -p /home/node/$NAME \
+  && chown node:node /home/node/$NAME
+WORKDIR /home/node/$NAME
+
 # Install utils
 RUN apk --no-cache add \
     su-exec \
@@ -20,16 +25,22 @@ RUN apk --no-cache add \
     netcat-openbsd
 
 # Copy app source
-COPY --chown=node:node package.json current/content/themes/$NAME/package.json
-COPY --chown=node:node src current/content/themes/$NAME/
-COPY --chown=node:node share/ghost/config.production.json config.production.json
-COPY --chown=node:node share/ghost/default-settings.json current/core/server/data/schema/default-settings.json
-COPY --chown=node:node share/ghost/ghost.patch ghost.patch
+COPY --chown=node:node package.json package.json
+COPY --chown=node:node package-lock.json package-lock.json
+COPY --chown=node:node .snyk .snyk
+COPY --chown=node:node src src/
 COPY --chown=node:node share/docker/start.sh start.sh
 COPY --chown=node:node share/docker/test.sh test.sh
 
-RUN su-exec node ln -s $GHOST_INSTALL/current/content/themes/$NAME content.orig/themes/$NAME && \
-    patch -p1 < ghost.patch && rm ghost.patch
+# Patch ghost installation
+COPY --chown=node:node share/ghost/icon.png $GHOST_INSTALL/content.orig/images/2019/01/icon.png
+COPY --chown=node:node share/ghost/logo.png $GHOST_INSTALL/content.orig/images/2019/01/logo.png
+COPY --chown=node:node share/ghost/config.production.json $GHOST_INSTALL/config.production.json
+COPY --chown=node:node share/ghost/default-settings.json $GHOST_INSTALL/current/core/server/data/schema/default-settings.json
+COPY --chown=node:node share/ghost/ghost.patch $GHOST_INSTALL/ghost.patch
+RUN cd $GHOST_INSTALL && su-exec node patch -p1 < ghost.patch && rm ghost.patch \
+  && su-exec node ln -s /home/node/$NAME/src $GHOST_INSTALL/current/content/themes/$NAME \
+  && su-exec node ln -s $GHOST_INSTALL/current/content/themes/$NAME $GHOST_INSTALL/content.orig/themes/$NAME
 
 EXPOSE 3000
 

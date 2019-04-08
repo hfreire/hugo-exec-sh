@@ -5,7 +5,7 @@
   "engines": {
     "node": ">= 6.0.0"
   },
-  "author": "Hugo Freire <hfreire@exec.sh>",
+  "author": "Hugo Freire <hugo@exec.sh>",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -34,7 +34,6 @@
     "snyk": "1.148.0"
   },
   "config": {
-    "posts_per_page": 15,
     "pre-git": {
       "commit-msg": "conventional",
       "allow-untracked-files": true
