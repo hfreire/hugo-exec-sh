@@ -34,7 +34,8 @@ module "hugo-exec-sh" {
   name       = "${var.name}"
   aws_region = "${var.aws_region}"
 
-  service_desired_count = "${var.service_desired_count}"
+  loadbalancer_session_stickiness_enabled = true
+  service_desired_count                   = "${var.service_desired_count}"
 
   container_definitions            = "${data.template_file.container_definitions.rendered}"
   health_check_path_preappend_name = false
