@@ -1031,12 +1031,14 @@ footer a:hover {
 }
 
 .gist .gist-data {
-  border: none !important;
+  border-color: #383838 !important;
+  border-radius: 5px !important;
+  border-bottom: none !important;
   background-color: #2b2b2b !important;
 }
 
 .gist-meta, .gist-file, .octotree_toggle, ul.comparison-list > li.title, button.button, a.button, span.button, button.minibutton, a.minibutton, span.minibutton, .clone-url-button > .clone-url-link {
-  background: #3b3f41 !important;
+  background-color: #3b3f41 !important;
   border-color: #383838 !important;
   border-radius: 0 0 3px 3px !important;
   text-shadow: none !important;
@@ -1045,7 +1047,20 @@ footer a:hover {
 
 .markdown-format pre, .markdown-body pre, .markdown-format .highlight pre, .markdown-body .highlight pre, body.blog pre, #facebox pre, .blob-expanded, .terminal, .copyable-terminal, #notebook .input_area, .blob-code-context, .markdown-format code, body.blog pre > code, .api pre, .api code, .CodeMirror, .highlight {
   background-color: #3b3f41 !important;
+}
+
+.gist-file, .gist-meta {
+  background-color: #2b2b2b !important;
+  border-color: #2b2b2b !important;
+}
+
+.markdown-body {
   color: #C5C8C6 !important
+}
+
+.gist .blob-wrapper {
+  padding: 20px 0 !important;
+  background-color: #3b3f41 !important;
 }
 
 .gist .blob-code {
