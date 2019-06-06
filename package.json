@@ -16,7 +16,7 @@
   },
   "homepage": "https://github.com/hfreire/hugo-exec-sh#readme",
   "devDependencies": {
-    "coveralls": "3.0.3",
+    "coveralls": "3.0.4",
     "eslint": "5.16.0",
     "eslint-config-hfreire": "2.0.3",
     "eslint-plugin-import": "2.17.3",
