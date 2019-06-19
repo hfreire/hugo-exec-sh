@@ -21,11 +21,12 @@ terraform taint module.${NAME}.module.cluster.module.services.module.tasks.aws_e
 
 terraform plan \
 -var "docker_repo=${DOCKER_REPO}" \
--var "docker_image_tag=${VERSION}" || exit 1
+-var "docker_image_tag=${VERSION}" \
+-out terraform.tfplan || exit 1
 
-terraform apply -auto-approve \
--var "docker_repo=${DOCKER_REPO}" \
--var "docker_image_tag=${VERSION}" || exit 1
+terraform apply -auto-approve terraform.tfplan || exit 1
+
+terraform output -json | jq 'with_entries(.value |= .value)' > terraform.json || exit 1
 
 popd
 
