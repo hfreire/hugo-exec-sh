@@ -24,6 +24,18 @@
         "value": "${url}"
       },
       {
+        "name": "database__client",
+        "value": "mysql"
+      },
+      {
+        "name": "database__connection__host",
+        "value": "${database__connection__host}"
+      },
+      {
+        "name": "database__connection__database",
+        "value": "${database__connection__database}"
+      },
+      {
         "name": "mail__from",
         "value": "${mail__from}"
       },
@@ -50,6 +62,16 @@
       {
         "name": "mail__options__auth__pass",
         "value": "${mail__options__auth__pass}"
+      }
+    ],
+    "secrets": [
+      {
+        "name": "database__connection__user",
+        "valueFrom": "${aws_ssm_parameter_database_username_arn}"
+      },
+      {
+        "name": "database__connection__password",
+        "valueFrom": "${aws_ssm_parameter_database_password_arn}"
       }
     ],
     "mountPoints": [

@@ -15,17 +15,31 @@ provider "template" {
   version = "2.1.2"
 }
 
+data "terraform_remote_state" "hugo-exec-sh" {
+  backend = "s3"
+
+  config = {
+    region = var.state_aws_region
+    bucket = var.state_aws_s3_bucket
+    key    = "${var.name}.tfstate"
+  }
+}
+
 data "template_file" "container_definitions" {
   template = file("${path.module}/container-definitions.json")
 
   vars = {
-    name                      = var.name
-    image                     = "${var.docker_repo}/${var.name}:${var.docker_image_tag}"
-    url                       = var.url
-    mail__from                = var.mail__from
-    mail__options__host       = var.mail__options__host
-    mail__options__auth__user = var.mail__options__auth__user
-    mail__options__auth__pass = var.mail__options__auth__pass
+    name                                    = var.name
+    image                                   = "${var.docker_repo}/${var.name}:${var.docker_image_tag}"
+    url                                     = var.url
+    database__connection__host              = data.terraform_remote_state.hugo-exec-sh.outputs.database_host
+    database__connection__database          = data.terraform_remote_state.hugo-exec-sh.outputs.database_name
+    aws_ssm_parameter_database_username_arn = data.terraform_remote_state.hugo-exec-sh.outputs.aws_ssm_parameter_database_username_arn
+    aws_ssm_parameter_database_password_arn = data.terraform_remote_state.hugo-exec-sh.outputs.aws_ssm_parameter_database_password_arn
+    mail__from                              = var.mail__from
+    mail__options__host                     = var.mail__options__host
+    mail__options__auth__user               = var.mail__options__auth__user
+    mail__options__auth__pass               = var.mail__options__auth__pass
   }
 }
 
@@ -35,7 +49,6 @@ module "hugo-exec-sh" {
   name       = var.name
   aws_region = var.aws_region
 
-  loadbalancer_session_stickiness_enabled = true
   service_desired_count                   = var.service_desired_count
 
   container_definitions            = data.template_file.container_definitions.rendered
@@ -48,3 +61,11 @@ module "hugo-exec-sh" {
   cdn_hostname_redirects             = var.cdn_hostname_redirects
 }
 
+module "database" {
+  source = "github.com/antifragile-systems/antifragile-database"
+
+  infrastructure_name = var.infrastructure_name
+  name                = var.name
+
+  user_password = var.database_user_password
+}
