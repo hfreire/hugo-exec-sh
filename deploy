@@ -1,20 +1,28 @@
 #!/usr/bin/env bash
 
-pushd $(cd -P -- "$(dirname -- "$0")" && pwd -P)/..
-
 TF_IN_AUTOMATION=true
 TF_PLAN=terraform.tfplan
 
-function clean_and_exit {
-  [ -f ${TERRAFORM_PLAN} ] && rm -f $TERRAFORM_PLAN
+PROGNAME=$(basename $0)
+
+pushd $(cd -P -- "$(dirname -- "$0")" && pwd -P)/..
+
+function clean_before_exit {
+  [ -f ${TF_PLAN} ] && rm -f $TF_PLAN
 
   popd
 }
 
-trap clean_and_exit EXIT
-trap 'exit' ERR
+function error_and_exit {
+	echo "${PROGNAME}: ${1:-"Unknown Error"}" 1>&2
 
-[ -z ${NAME-} ] && exit 1
+	exit 1
+}
+
+trap error_and_exit ERR
+trap clean_before_exit EXIT
+
+[ -z ${NAME-} ] && error_and_exit "$LINENO: environment variable NAME is not set."
 USER_ENV=env.sh
 [ -f ${USER_ENV} ] && { set -a; . $USER_ENV; set +a; }
 
@@ -24,16 +32,16 @@ terraform init -upgrade \
 -backend-config="bucket=${ANTIFRAGILE_STATE_AWS_S3_BUCKET}" \
 -backend-config="key=${NAME}.tfstate" \
 -backend-config="encrypt=true" \
--backend-config="dynamodb_table=${ANTIFRAGILE_STATE_AWS_DYNAMODB_TABLE}" || exit 1
+-backend-config="dynamodb_table=${ANTIFRAGILE_STATE_AWS_DYNAMODB_TABLE}" || error_and_exit "$LINENO: terraform initialization failed."
 
-terraform get -update=true || exit 1
+terraform get -update=true || error_and_exit "$LINENO: terraform get failed."
 
 USER_PRE_DEPLOY=./pre-deploy.sh
 [ -x ${USER_PRE_DEPLOY} ] && $(eval $USER_PRE_DEPLOY)
 
-terraform plan -input=false -out $TF_PLAN -target=module.${NAME} || exit 1
+terraform plan -input=false -out $TF_PLAN -target=${TF_TARGET:-"module.${NAME}"} || error_and_exit "$LINENO: terraform plan failed."
 
-terraform apply -input=false -auto-approve $TF_PLAN || exit 1
+terraform apply -input=false -auto-approve $TF_PLAN || error_and_exit "$LINENO: terraform apply failed."
 
 USER_POST_DEPLOY=./post-deploy.sh
 [ -x ${USER_POST_DEPLOY} ] && $(eval $USER_POST_DEPLOY)
