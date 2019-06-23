@@ -16,7 +16,7 @@ trap 'exit' ERR
 
 [ -z ${NAME-} ] && exit 1
 USER_ENV=env.sh
-[ -f ${USER_ENV} ] && (set -a; . $USER_ENV; set +a)
+[ -f ${USER_ENV} ] && { set -a; . $USER_ENV; set +a; }
 
 [ -z ${ANTIFRAGILE_STATE_AWS_REGION-} ] || [ -z ${ANTIFRAGILE_STATE_AWS_S3_BUCKET-} ] || [ -z ${ANTIFRAGILE_STATE_AWS_DYNAMODB_TABLE-} ] || \
 terraform init -upgrade \
