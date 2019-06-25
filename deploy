@@ -37,13 +37,13 @@ terraform init -upgrade \
 terraform get -update=true || error_and_exit "$LINENO: terraform get failed."
 
 USER_PRE_DEPLOY=./pre-deploy.sh
-[ -x ${USER_PRE_DEPLOY} ] && $(eval $USER_PRE_DEPLOY)
+[ -x ${USER_PRE_DEPLOY} ] && $(${USER_PRE_DEPLOY})
 
 terraform plan -input=false -out $TF_PLAN -target=${TF_TARGET:-"module.${NAME}"} || error_and_exit "$LINENO: terraform plan failed."
 
 terraform apply -input=false -auto-approve $TF_PLAN || error_and_exit "$LINENO: terraform apply failed."
 
 USER_POST_DEPLOY=./post-deploy.sh
-[ -x ${USER_POST_DEPLOY} ] && $(eval $USER_POST_DEPLOY)
+[ -x ${USER_POST_DEPLOY} ] && $(${USER_POST_DEPLOY})
 
 exit 0
