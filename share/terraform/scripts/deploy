@@ -14,12 +14,12 @@ function clean_before_exit {
 }
 
 function error_and_exit {
-	echo "${PROGNAME}: ${1:-"Unknown Error"}" 1>&2
+	echo "${PROGNAME}: ${1:-"Unknown error"}" 1>&2
 
 	exit 1
 }
 
-trap error_and_exit ERR
+trap 'error_and_exit "${LINENO}: Unknown error"' ERR
 trap clean_before_exit EXIT
 
 [ -z ${NAME-} ] && error_and_exit "$LINENO: environment variable NAME is not set."
