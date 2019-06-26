@@ -23,8 +23,8 @@ trap 'error_and_exit "${LINENO}: Unknown error"' ERR
 trap clean_before_exit EXIT
 
 [ -z ${NAME-} ] && error_and_exit "$LINENO: environment variable NAME is not set."
-USER_ENV=env.sh
-[ -f ${USER_ENV} ] && { set -a; . $USER_ENV; set +a; }
+
+[ -f env.sh ] && { set -a; . env.sh; set +a; }
 
 [ -z ${ANTIFRAGILE_STATE_AWS_REGION-} ] || [ -z ${ANTIFRAGILE_STATE_AWS_S3_BUCKET-} ] || [ -z ${ANTIFRAGILE_STATE_AWS_DYNAMODB_TABLE-} ] || \
 terraform init -upgrade \
@@ -36,14 +36,12 @@ terraform init -upgrade \
 
 terraform get -update=true || error_and_exit "$LINENO: terraform get failed."
 
-USER_PRE_DEPLOY=./pre-deploy.sh
-[ -x ${USER_PRE_DEPLOY} ] && $(${USER_PRE_DEPLOY})
+[ -f ./pre-deploy.sh ] && . ./pre-deploy.sh
 
 terraform plan -input=false -out $TF_PLAN -target=${TF_TARGET:-"module.${NAME}"} || error_and_exit "$LINENO: terraform plan failed."
 
 terraform apply -input=false -auto-approve $TF_PLAN || error_and_exit "$LINENO: terraform apply failed."
 
-USER_POST_DEPLOY=./post-deploy.sh
-[ -x ${USER_POST_DEPLOY} ] && $(${USER_POST_DEPLOY})
+[ -x ./post-deploy.sh ] && . ./post-deploy.sh
 
 exit 0
