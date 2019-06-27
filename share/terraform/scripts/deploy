@@ -42,6 +42,6 @@ terraform plan -input=false -out $TF_PLAN -target=${TF_TARGET:-"module.${NAME}"}
 
 terraform apply -input=false -auto-approve $TF_PLAN || error_and_exit "$LINENO: terraform apply failed."
 
-[ -x ./post-deploy.sh ] && . ./post-deploy.sh
+[ -f ./post-deploy.sh ] && . ./post-deploy.sh
 
 exit 0
