@@ -1,6 +1,7 @@
 #  My personal website for blogging and :pencil2: note-taking 
 
-[![Build Status](https://travis-ci.org/hfreire/hugo-exec-sh.svg?branch=master)](https://travis-ci.org/hfreire/hugo-exec-sh)
+[![](https://github.com/hfreire/hugo-exec-sh/workflows/ci/badge.svg)](https://github.com/hfreire/hugo-exec-sh/actions?workflow=ci)
+[![](https://github.com/hfreire/hugo-exec-sh/workflows/cd/badge.svg)](https://github.com/hfreire/hugo-exec-sh/actions?workflow=cd)
 [![Coverage Status](https://coveralls.io/repos/github/hfreire/hugo-exec-sh/badge.svg?branch=master)](https://coveralls.io/github/hfreire/hugo-exec-sh?branch=master)
 [![Known Vulnerabilities](https://snyk.io/test/github/hfreire/hugo-exec-sh/badge.svg)](https://snyk.io/test/github/hfreire/hugo-exec-sh)
 [![](https://img.shields.io/github/release/hfreire/hugo-exec-sh.svg)](https://github.com/hfreire/hugo-exec-sh/releases)
