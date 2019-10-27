@@ -54,5 +54,5 @@ jobs:
           TF_VAR_mail__options__auth__pass: ${{ secrets.TF_VAR_mail__options__auth__pass }}
           TF_VAR_mail__from: ${{ secrets.TF_VAR_mail__from }}
           TF_VAR_cdn_hostname: ${{ secrets.TF_VAR_cdn_hostname }}
+          TF_VAR_cdn_hostname_redirects: ${{ secrets.TF_VAR_cdn_hostname_redirects }}
           TF_VAR_database_user_password: ${{ secrets.TF_VAR_database_user_password }}
-
