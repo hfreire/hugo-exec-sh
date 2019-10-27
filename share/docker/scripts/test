@@ -2,6 +2,23 @@
 
 set -Eeuo pipefail
 
+PROGNAME=$(basename $0)
+
+pushd $(cd -P -- "$(dirname -- "$0")" && pwd -P)/..
+
+function clean_before_exit {
+  popd
+}
+
+function error_and_exit {
+  echo "${PROGNAME}: ${1:-"Unknown error"}" 1>&2
+
+  exit 1
+}
+
+trap 'error_and_exit "${LINENO}: Unknown error"' ERR
+trap clean_before_exit EXIT
+
 [ -z ${DOCKER_REPO-} ] && exit 1
 [ -z ${NAME-} ] && exit 1
 
@@ -9,14 +26,10 @@ VERSION=$(if [ -z ${VERSION-} ]; then echo $(if [ -z ${DOCKER_TAG-} ]; then echo
 
 IMAGE_NAME=$(if [ -z ${IMAGE_NAME-} ]; then echo $DOCKER_REPO/$NAME:$VERSION; else echo $IMAGE_NAME; fi)
 
-pushd $(cd -P -- "$(dirname -- "$0")" && pwd -P)/..
-
 CID=$(docker run --entrypoint "./test.sh" -d $IMAGE_NAME)
 
 docker logs -f $CID
 
-RET=$(docker wait $CID)
+docker wait $CID
 
-popd
-
-exit $RET
+exit 0
