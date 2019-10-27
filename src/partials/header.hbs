@@ -1,16 +1,16 @@
 <header class="main-header">
   {{#if @blog.logo}}
-    <a class="blog-logo" href="{{@blog.url}}">
-      <img src="{{@blog.logo}}" alt="{{@blog.title}}"/>
+    <a class="blog-logo" href="{{@site.url}}">
+      <img src="{{@site.logo}}" alt="{{@site.title}}"/>
     </a>
   {{/if}}
 
   <div class="main-header-content">
-    <h1 class="main-header-title">{{@blog.title}}</h1>
+    <h1 class="main-header-title">{{@site.title}}</h1>
 
     <h2 class="main-header-second-title">$ exec sh</h2>
 
-    <h3 class="main-header-description">{{@blog.description}}</h3>
+    <h3 class="main-header-description">{{@site.description}}</h3>
   </div>
 
   <a class="scroll-down icon-arrow-left" href="#main-content">

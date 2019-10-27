@@ -1,6 +1,9 @@
 {
   "name": "hugo-exec-sh",
   "description": "",
+  "keywords": [
+    "ghost-theme"
+  ],
   "version": "0.0.0",
   "engines": {
     "ghost-api": "v2"
