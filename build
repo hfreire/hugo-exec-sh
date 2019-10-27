@@ -2,6 +2,23 @@
 
 set -Eeuo pipefail
 
+PROGNAME=$(basename $0)
+
+pushd $(cd -P -- "$(dirname -- "$0")" && pwd -P)/..
+
+function clean_before_exit {
+  popd
+}
+
+function error_and_exit {
+  echo "${PROGNAME}: ${1:-"Unknown error"}" 1>&2
+
+  exit 1
+}
+
+trap 'error_and_exit "${LINENO}: Unknown error"' ERR
+trap clean_before_exit EXIT
+
 [ -z ${DOCKER_REPO-} ] && exit 1
 [ -z ${NAME-} ] && exit 1
 
@@ -11,16 +28,12 @@ VERSION_BUILD_DATE=`$(which date)`
 
 IMAGE_NAME=$(if [ -z ${IMAGE_NAME-} ]; then echo $DOCKER_REPO/$NAME:$VERSION; else echo $IMAGE_NAME; fi)
 
-pushd $(cd -P -- "$(dirname -- "$0")" && pwd -P)/..
-
-RET=$(docker build -t $IMAGE_NAME -f Dockerfile \
+docker build -t $IMAGE_NAME -f Dockerfile \
 --build-arg=NPM_TOKEN=$NPM_TOKEN \
 --build-arg=NAME=$NAME \
 --build-arg=VERSION=$VERSION \
 --build-arg=VERSION_COMMIT=$VERSION_COMMIT \
 --build-arg=VERSION_BUILD_DATE="$VERSION_BUILD_DATE" \
-../..)
+../..
 
-popd
-
-exit $RET
+exit 0
