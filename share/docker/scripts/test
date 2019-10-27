@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -Eeuo pipefail
+
 [ -z ${DOCKER_REPO-} ] && exit 1
 [ -z ${NAME-} ] && exit 1
 

@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -Eeuo pipefail
+
 [ -z ${DOCKER_REPO-} ] && exit 1
 [ -z ${NAME-} ] && exit 1
 
@@ -9,8 +11,8 @@ IMAGE_NAME=$(if [ -z ${IMAGE_NAME-} ]; then echo $DOCKER_REPO/$NAME:$VERSION; el
 
 pushd $(cd -P -- "$(dirname -- "$0")" && pwd -P)/..
 
-docker push ${IMAGE_NAME}
+RET=$(docker push $IMAGE_NAME)
 
 popd
 
-exit 0
+exit $RET
