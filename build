@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -Eeuo pipefail
+
 [ -z ${DOCKER_REPO-} ] && exit 1
 [ -z ${NAME-} ] && exit 1
 
@@ -11,14 +13,14 @@ IMAGE_NAME=$(if [ -z ${IMAGE_NAME-} ]; then echo $DOCKER_REPO/$NAME:$VERSION; el
 
 pushd $(cd -P -- "$(dirname -- "$0")" && pwd -P)/..
 
-docker build -t ${IMAGE_NAME} -f Dockerfile \
---build-arg=NPM_TOKEN=${NPM_TOKEN} \
---build-arg=NAME=${NAME} \
---build-arg=VERSION=${VERSION} \
---build-arg=VERSION_COMMIT=${VERSION_COMMIT} \
---build-arg=VERSION_BUILD_DATE="${VERSION_BUILD_DATE}" \
-../..
+RET=$(docker build -t $IMAGE_NAME -f Dockerfile \
+--build-arg=NPM_TOKEN=$NPM_TOKEN \
+--build-arg=NAME=$NAME \
+--build-arg=VERSION=$VERSION \
+--build-arg=VERSION_COMMIT=$VERSION_COMMIT \
+--build-arg=VERSION_BUILD_DATE="$VERSION_BUILD_DATE" \
+../..)
 
 popd
 
-exit 0
+exit $RET
