@@ -83,8 +83,6 @@
     "prepare": "npm run snyk:protect",
     "test": "npm run clean && npm run lint && npm run jest && npm run ghost:test",
     "commit": "./node_modules/.bin/commit-wizard",
-    "build": "npm run docker:build",
-    "push": "npm run docker:push",
     "deploy": "npm run terraform:deploy",
     "develop": "mkdir -p tmp && docker run -p 5302:3000 -e NODE_ENV=development -e url=http://localhost:5302 -v $(pwd)/src/:/var/lib/ghost/content/themes/hugo-exec-sh/ -v $(pwd)/tmp/:/var/lib/ghost/content/data/ hfreire/hugo-exec-sh"
   }
