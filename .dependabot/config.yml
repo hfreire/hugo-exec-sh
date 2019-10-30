@@ -3,9 +3,7 @@ version: 1
 update_configs:
   - package_manager: "javascript"
     directory: "/"
-
   - package_manager: "docker"
     directory: "share/docker/"
-
   - package_manager: "terraform"
     directory: "share/terraform/"
