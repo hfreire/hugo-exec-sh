@@ -15,7 +15,7 @@ provider "template" {
   version = "2.1.2"
 }
 
-data "terraform_remote_state" "hugo-exec-sh" {
+data "terraform_remote_state" "state" {
   backend = "s3"
 
   config = {
@@ -32,10 +32,10 @@ data "template_file" "container_definitions" {
     name                                    = var.name
     image                                   = "${var.docker_repo}/${var.name}:${var.docker_image_tag}"
     url                                     = var.url
-    database__connection__host              = data.terraform_remote_state.hugo-exec-sh.outputs.database_host
-    database__connection__database          = data.terraform_remote_state.hugo-exec-sh.outputs.database_name
-    aws_ssm_parameter_database_username_arn = data.terraform_remote_state.hugo-exec-sh.outputs.aws_ssm_parameter_database_username_arn
-    aws_ssm_parameter_database_password_arn = data.terraform_remote_state.hugo-exec-sh.outputs.aws_ssm_parameter_database_password_arn
+    database__connection__host              = data.terraform_remote_state.state.outputs.database_host
+    database__connection__database          = data.terraform_remote_state.state.outputs.database_name
+    aws_ssm_parameter_database_username_arn = data.terraform_remote_state.state.outputs.aws_ssm_parameter_database_username_arn
+    aws_ssm_parameter_database_password_arn = data.terraform_remote_state.state.outputs.aws_ssm_parameter_database_password_arn
     mail__from                              = var.mail__from
     mail__options__host                     = var.mail__options__host
     mail__options__auth__user               = var.mail__options__auth__user
@@ -43,7 +43,7 @@ data "template_file" "container_definitions" {
   }
 }
 
-module "hugo-exec-sh" {
+module "service" {
   source = "github.com/antifragile-systems/antifragile-service"
 
   name       = var.name
