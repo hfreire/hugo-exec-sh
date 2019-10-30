@@ -7,6 +7,3 @@ update_configs:
   - package_manager: "docker"
     directory: "share/docker/"
     update_schedule: "daily"
-  - package_manager: "terraform"
-    directory: "share/terraform/"
-    update_schedule: "daily"
