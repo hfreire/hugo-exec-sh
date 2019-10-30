@@ -28,4 +28,6 @@ IMAGE_NAME=$(if [ -z ${IMAGE_NAME-} ]; then echo $DOCKER_REPO/$NAME:$VERSION; el
 
 docker push $IMAGE_NAME
 
+[ $VERSION != latest ] && docker push $DOCKER_REPO/$NAME:latest
+
 exit 0
