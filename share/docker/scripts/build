@@ -36,4 +36,6 @@ docker build -t $IMAGE_NAME -f Dockerfile \
 --build-arg=VERSION_BUILD_DATE="$VERSION_BUILD_DATE" \
 ../..
 
+[ $VERSION != latest ] && docker tag $IMAGE_NAME $DOCKER_REPO/$NAME:latest
+
 exit 0
