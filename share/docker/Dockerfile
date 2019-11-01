@@ -43,7 +43,9 @@ COPY --chown=node:node share/ghost/ghost.patch $GHOST_INSTALL/ghost.patch
 RUN set -x \
   && cd $GHOST_INSTALL && su-exec node patch -p1 < ghost.patch && rm ghost.patch \
   && su-exec node ln -s /home/node/$NAME/src $GHOST_INSTALL/current/content/themes/$NAME \
-  && su-exec node ln -s $GHOST_INSTALL/current/content/themes/$NAME $GHOST_INSTALL/content.orig/themes/$NAME
+  && su-exec node ln -s $GHOST_INSTALL/current/content/themes/$NAME $GHOST_INSTALL/content.orig/themes/$NAME \
+  && cd $GHOST_INSTALL/current && su-exec node yarn \
+  && su-exec node yarn cache clean && su-exec node npm cache clean --force && npm cache clean --force && rm -rv /tmp/yarn*
 
 EXPOSE 3000
 
