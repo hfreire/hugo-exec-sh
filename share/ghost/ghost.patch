@@ -48,7 +48,7 @@ index c282e53b9..22ec7f957 100644
 +        }
 +
 +        if (req.headers['user-agent'] !== 'Amazon CloudFront') {
-+            common.logging.info(`${req.ips || req.ip} - ${req.userId || '-'} [${new Date().toISOString()}] "${req.method} ${req.originalUrl}" HTTP/${req.httpVersionMajor}.${req.httpVersionMinor} ${res.statusCode} ${res.getHeader('content-length') || (res.__headers && res.__headers['Content-Length']) || '-'} "${req.get('referer')}" "${req.get('user-agent')}" ${res.responseTime}`);
++            common.logging.info(`${req.ips || req.ip} - ${req.userId || '-'} [${new Date().toISOString()}] "${req.method} ${req.originalUrl}" HTTP/${req.httpVersionMajor}.${req.httpVersionMinor} ${res.statusCode} ${res.getHeader('content-length') || (res.__headers && res.__headers['Content-Length']) || '-'} "${req.get('referer') || '-'}" "${req.get('user-agent') | '-'}" ${res.responseTime}`);
          }
 
          res.removeListener('finish', logResponse);
