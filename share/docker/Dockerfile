@@ -44,8 +44,8 @@ RUN set -x \
   && cd $GHOST_INSTALL && su-exec node patch -p1 < ghost.patch && rm ghost.patch \
   && su-exec node ln -s /home/node/$NAME/src $GHOST_INSTALL/current/content/themes/$NAME \
   && su-exec node ln -s $GHOST_INSTALL/current/content/themes/$NAME $GHOST_INSTALL/content.orig/themes/$NAME \
-  && cd $GHOST_INSTALL/current && su-exec node yarn \
-  && su-exec node yarn cache clean && su-exec node npm cache clean --force && npm cache clean --force && rm -rv /tmp/yarn*
+  && cd $GHOST_INSTALL/current && su-exec node yarn add modern-logger@1.5.53 \
+  && su-exec node yarn cache clean && su-exec node npm cache clean --force && npm cache clean --force && rm -rv /tmp/yarn* /tmp/v8*
 
 EXPOSE 3000
 
