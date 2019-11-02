@@ -56,7 +56,7 @@ diff --git a/current/core/server/lib/common/logging.js b/current/core/server/lib
 index d3d332a42..d312b3a02 100644
 --- a/current/core/server/lib/common/logging.js
 +++ b/current/core/server/lib/common/logging.js
-@@ -1,15 +1,13 @@
+@@ -1,15 +1,14 @@
 -const config = require('../../config'),
 -    {logging} = require('ghost-ignition');
 -
@@ -76,7 +76,8 @@ index d3d332a42..d312b3a02 100644
 +    transports: {
 +        console: [
 +            {
-+                colorize: false
++                colorize: false,
++                timestamp: false
 +            }
 +        ]
 +    },
@@ -84,15 +85,3 @@ index d3d332a42..d312b3a02 100644
  });
 +
 +module.exports = Logger;
-diff --git a/current/package.json b/current/package.json
-index 196c5ae7c..2d5f83d27 100644
---- a/current/package.json
-+++ b/current/package.json
-@@ -105,6 +105,7 @@
-     "metascraper-title": "5.7.14",
-     "metascraper-url": "5.7.14",
-     "mobiledoc-dom-renderer": "0.7.0",
-+    "modern-logger": "1.5.53",
-     "moment": "2.24.0",
-     "moment-timezone": "0.5.23",
-     "multer": "1.4.2",
