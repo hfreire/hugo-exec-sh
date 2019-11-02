@@ -20,6 +20,10 @@
         "value": "cloudfront-forwarded-proto"
       },
       {
+        "name": "LOG_LEVEL",
+        "value": "${log_level}"
+      },
+      {
         "name": "url",
         "value": "${url}"
       },
@@ -87,7 +91,7 @@
         "awslogs-group": "$${awslogs-group}",
         "awslogs-region": "$${awslogs-region}",
         "awslogs-stream-prefix": "$${awslogs-stream-prefix}",
-        "awslogs-multiline-pattern": "^(info|warn|error):"
+        "awslogs-multiline-pattern": "^(debug|info|warn|error):"
       }
     }
   }

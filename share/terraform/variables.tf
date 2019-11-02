@@ -32,6 +32,10 @@ variable "api_keys" {
   default = [ ]
 }
 
+variable "log_level" {
+  default = "debug"
+}
+
 variable "cdn_hostname" {
 }
 

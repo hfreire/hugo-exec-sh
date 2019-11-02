@@ -31,6 +31,7 @@ data "template_file" "container_definitions" {
   vars = {
     name                                    = var.name
     image                                   = "${var.docker_repo}/${var.name}:${var.docker_image_tag}"
+    log_level                               = var.log_level
     url                                     = var.url
     database__connection__host              = data.terraform_remote_state.state.outputs.database_host
     database__connection__database          = data.terraform_remote_state.state.outputs.database_name
