@@ -27,11 +27,6 @@ variable "service_desired_count" {
   default = 1
 }
 
-variable "api_keys" {
-  type    = list(string)
-  default = [ ]
-}
-
 variable "log_level" {
   default = "debug"
 }
