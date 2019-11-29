@@ -1,4 +1,4 @@
-FROM ghost:3.0.3-alpine
+FROM ghost:3.1.0-alpine
 
 LABEL maintainer="hugo@exec.sh"
 
