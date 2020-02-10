@@ -1,23 +1,29 @@
-FROM ghost:3.5.0-alpine
+FROM ghost:3.5.0-alpine AS ghost
 
+FROM ghost AS build
+ARG NAME
+ARG NPM_TOKEN
+WORKDIR /tmp/$NAME
+
+# Install npm packages
+COPY package.json package-lock.json .snyk ./
+RUN NODE_ENV= npm ci
+
+# Build app
+COPY src src/
+RUN set -x \
+  && npm run build --if-present \
+  && npm prune --production \
+  && npm cache clean --force
+
+FROM ghost
 LABEL maintainer="hugo@exec.sh"
 
-# Set app runtime environment variables
-ARG NPM_TOKEN
-ARG NAME
-ENV NAME $NAME
-ARG VERSION
-ENV VERSION $VERSION
-ARG VERSION_COMMIT
-ENV VERSION_COMMIT $VERSION_COMMIT
-ARG VERSION_BUILD_DATE
-ENV VERSION_BUILD_DATE $VERSION_BUILD_DATE
-
-# Create app directory
-RUN set -eux; \
-  mkdir /home/node/$NAME; \
-  chown node:node /home/node/$NAME
-WORKDIR /home/node/$NAME
+# Copy app build
+RUN chown node:node /home/node/$NAME
+COPY --from=build --chown=node:node /tmp/$NAME /home/node/$NAME
+COPY --chown=node:node share/docker/start.sh start.sh
+COPY --chown=node:node share/docker/test.sh test.sh
 
 # Install utils
 RUN set -x \
@@ -25,14 +31,6 @@ RUN set -x \
     su-exec \
     curl \
     netcat-openbsd
-
-# Copy app source
-COPY --chown=node:node package.json package.json
-COPY --chown=node:node package-lock.json package-lock.json
-COPY --chown=node:node .snyk .snyk
-COPY --chown=node:node src src/
-COPY --chown=node:node share/docker/start.sh start.sh
-COPY --chown=node:node share/docker/test.sh test.sh
 
 # Patch ghost installation
 COPY --chown=node:node share/ghost/icon.png $GHOST_INSTALL/content.orig/images/2019/01/icon.png
@@ -46,6 +44,12 @@ RUN set -x \
   && su-exec node ln -s $GHOST_INSTALL/current/content/themes/$NAME $GHOST_INSTALL/content.orig/themes/$NAME \
   && cd $GHOST_INSTALL/current && su-exec node yarn add modern-logger@1.5.53 \
   && su-exec node yarn cache clean && su-exec node npm cache clean --force && npm cache clean --force && rm -rv /tmp/yarn* /tmp/v8*
+
+# Set app runtime environment variables
+ENV NAME $NAME
+ENV VERSION $VERSION
+ENV VERSION_COMMIT $VERSION_COMMIT
+ENV VERSION_BUILD_DATE $VERSION_BUILD_DATE
 
 EXPOSE 3000
 
