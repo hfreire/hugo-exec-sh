@@ -18,6 +18,11 @@ RUN set -x \
 
 FROM ghost
 LABEL maintainer="hugo@exec.sh"
+ARG NAME
+ARG VERSION
+ARG VERSION_COMMIT
+ARG VERSION_BUILD_DATE
+WORKDIR /home/node/$NAME
 
 # Copy app build
 RUN chown node:node /home/node/$NAME
