@@ -1,4 +1,4 @@
-FROM ghost:3.5.2-alpine AS ghost
+FROM ghost:3.6.0-alpine AS ghost
 
 FROM ghost AS build
 ARG NAME
