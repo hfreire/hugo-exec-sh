@@ -13,11 +13,12 @@ RUN set -x \
   && cd $GHOST_INSTALL \
     && su-exec node patch -p1 < ghost.patch \
     && rm ghost.patch \
+  && cd $GHOST_INSTALL/current \
     && su-exec node yarn add modern-logger@1.5.53 \
     && su-exec node yarn cache clean \
     && su-exec node npm cache clean --force \
     && npm cache clean --force \
-    && rm -rv /tmp/v8*
+    && rm -rv /tmp/yarn* /tmp/v8*
 
 # Replace default ghost assets and configuration
 COPY --chown=node:node share/ghost/icon.png $GHOST_INSTALL/content.orig/images/2019/01/icon.png
