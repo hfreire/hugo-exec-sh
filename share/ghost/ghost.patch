@@ -82,3 +82,5 @@ index e057e8166..8c4bac81b 100644
 +    },
 +    enableEmoji: false
  });
++
++module.exports = Logger;
