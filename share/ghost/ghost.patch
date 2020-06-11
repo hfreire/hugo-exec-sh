@@ -1,21 +1,20 @@
-diff --git a/current/core/server/web/parent-app.js b/current/core/server/web/parent-app.js
-index 1673792d1..143a8b62e 100644
---- a/current/core/server/web/parent-app.js
-+++ b/current/core/server/web/parent-app.js
-@@ -13,6 +13,25 @@ module.exports = function setupParentApp(options = {}) {
+diff --git a/current/core/server/web/parent/app.js b/current/core/server/web/parent/app.js
+index 199e8114d..4b9f75f81 100644
+--- a/current/core/server/web/parent/app.js
++++ b/current/core/server/web/parent/app.js
+@@ -71,6 +71,24 @@ module.exports = function setupParentApp(options = {}) {
 
-     // ## Global settings
+     parentApp.use(vhost(frontendVhostArg, frontendApp));
 
 +    // If we are behind a proxy that uses a non-standard forwarded proto header,
 +    // we should replace the X-Forwarded-Proto with its value
-+    var forwardedProtoHeader = config.get('forwarded_proto_header');
++    const forwardedProtoHeader = config.get('forwarded_proto_header');
 +    if (forwardedProtoHeader) {
 +        parentApp.use(function (req, res, next) {
 +            if (req.headers[forwardedProtoHeader]) {
 +                req.headers['x-forwarded-proto'] = req.headers[forwardedProtoHeader];
 +                req.headers['x-forwarded-port'] = req.headers[forwardedProtoHeader] === 'https' ? 443 : 80;
 +            }
-+
 +            next();
 +        });
 +    }
@@ -25,13 +24,13 @@ index 1673792d1..143a8b62e 100644
 +        res.send({answer: 'pong'});
 +    });
 +
-     // Make sure 'req.secure' is valid for proxied requests
-     // (X-Forwarded-Proto header will be checked, if present)
-     parentApp.enable('trust proxy');
-diff --git a/current/core/server/web/shared/middlewares/log-request.js b/current/core/server/web/shared/middlewares/log-request.js
-index c282e53b9..22ec7f957 100644
---- a/current/core/server/web/shared/middlewares/log-request.js
-+++ b/current/core/server/web/shared/middlewares/log-request.js
+     debug('ParentApp setup end');
+
+     return parentApp;
+diff --git a/current/core/server/web/parent/middleware/log-request.js b/current/core/server/web/parent/middleware/log-request.js
+index 7eedfc7b8..917359069 100644
+--- a/current/core/server/web/parent/middleware/log-request.js
++++ b/current/core/server/web/parent/middleware/log-request.js
 @@ -7,13 +7,15 @@ module.exports = function logRequest(req, res, next) {
      const startTime = Date.now();
 
@@ -41,25 +40,26 @@ index c282e53b9..22ec7f957 100644
          req.userId = req.user ? (req.user.id ? req.user.id : req.user) : null;
 
          if (req.err && req.err.statusCode !== 404) {
--            common.logging.error({req: req, res: res, err: req.err});
+-            logging.error({req: req, res: res, err: req.err});
 -        } else {
--            common.logging.info({req: req, res: res});
-+            common.logging.error(req.err);
+-            logging.info({req: req, res: res});
++            logging.error(req.err);
 +        }
 +
 +        if (req.headers['user-agent'] !== 'Amazon CloudFront') {
-+            common.logging.debug(`${req.ips || req.ip} - ${req.userId || '-'} [${new Date().toISOString()}] "${req.method} ${req.originalUrl}" HTTP/${req.httpVersionMajor}.${req.httpVersionMinor} ${res.statusCode} ${res.getHeader('content-length') || (res.__headers && res.__headers['Content-Length']) || '-'} "${req.get('referer') || '-'}" "${req.get('user-agent') || '-'}" ${res.responseTime}`);
++            logging.debug(`${req.ips || req.ip} - ${req.userId || '-'} [${new Date().toISOString()}] "${req.method} ${req.originalUrl}" HTTP/${req.httpVersionMajor}.${req.httpVersionMinor} ${res.statusCode} ${res.getHeader('content-length') || (res.__headers && res.__headers['Content-Length']) || '-'} "${req.get('referer') || '-'}" "${req.get('user-agent') || '-'}" ${res.responseTime}`);
          }
 
          res.removeListener('finish', logResponse);
-diff --git a/current/core/server/lib/common/logging.js b/current/core/server/lib/common/logging.js
-index d3d332a42..d312b3a02 100644
---- a/current/core/server/lib/common/logging.js
-+++ b/current/core/server/lib/common/logging.js
-@@ -1,15 +1,14 @@
--const config = require('../../config'),
--    {logging} = require('ghost-ignition');
--
+diff --git a/current/core/shared/logging.js b/current/core/shared/logging.js
+index e057e8166..8c4bac81b 100644
+--- a/current/core/shared/logging.js
++++ b/current/core/shared/logging.js
+@@ -1,15 +1,13 @@
+-const config = require('./config');
+-const {logging} = require('ghost-ignition');
++const Logger = require('modern-logger');
+
 -module.exports = logging({
 -    name: config.get('logging:name'),
 -    env: config.get('env'),
@@ -71,7 +71,6 @@ index d3d332a42..d312b3a02 100644
 -    gelf: config.get('logging:gelf'),
 -    loggly: config.get('logging:loggly'),
 -    rotation: config.get('logging:rotation')
-+const Logger = require('modern-logger');
 +Logger.configure({
 +    transports: {
 +        console: [
@@ -83,5 +82,3 @@ index d3d332a42..d312b3a02 100644
 +    },
 +    enableEmoji: false
  });
-+
-+module.exports = Logger;
