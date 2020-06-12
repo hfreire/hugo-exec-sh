@@ -11,6 +11,15 @@
     },
     "session_secret": {
       "defaultValue": null
+    },
+    "theme_session_secret": {
+      "defaultValue": null
+    },
+    "ghost_public_key": {
+      "defaultValue": null
+    },
+    "ghost_private_key": {
+      "defaultValue": null
     }
   },
   "blog": {
@@ -56,12 +65,7 @@
       "defaultValue": "true",
       "validations": {
         "isEmpty": false,
-        "isIn": [
-          [
-            "true",
-            "false"
-          ]
-        ]
+        "isIn": [["true", "false"]]
       }
     },
     "permalinks": {
@@ -75,12 +79,7 @@
     "amp": {
       "defaultValue": "true",
       "validations": {
-        "isIn": [
-          [
-            "true",
-            "false"
-          ]
-        ]
+        "isIn": [["true", "false"]]
       }
     },
     "ghost_head": {
@@ -106,6 +105,73 @@
     },
     "unsplash": {
       "defaultValue": "{\"isActive\": true}"
+    },
+    "meta_title": {
+      "defaultValue": null,
+      "validations": {
+        "isLength": {
+          "max": 300
+        }
+      }
+    },
+    "meta_description": {
+      "defaultValue": null,
+      "validations": {
+        "isLength": {
+          "max": 500
+        }
+      }
+    },
+    "og_image": {
+      "defaultValue": null,
+      "validations": {
+        "isLength": {
+          "max": 2000
+        }
+      }
+    },
+    "og_title": {
+      "defaultValue": null,
+      "validations": {
+        "isLength": {
+          "max": 300
+        }
+      }
+    },
+    "og_description": {
+      "defaultValue": null,
+      "validations": {
+        "isLength": {
+          "max": 300
+        }
+      }
+    },
+    "twitter_image": {
+      "defaultValue": null,
+      "validations": {
+        "isLength": {
+          "max": 2000
+        }
+      }
+    },
+    "twitter_title": {
+      "defaultValue": null,
+      "validations": {
+        "isLength": {
+          "max": 300
+        }
+      }
+    },
+    "twitter_description": {
+      "defaultValue": null,
+      "validations": {
+        "isLength": {
+          "max": 300
+        }
+      }
+    },
+    "shared_views": {
+      "defaultValue": "{}"
     }
   },
   "theme": {
@@ -113,24 +179,11 @@
       "defaultValue": "hugo-exec-sh"
     }
   },
-  "app": {
-    "active_apps": {
-      "defaultValue": "[]"
-    },
-    "installed_apps": {
-      "defaultValue": "[]"
-    }
-  },
   "private": {
     "is_private": {
       "defaultValue": "false",
       "validations": {
-        "isIn": [
-          [
-            "true",
-            "false"
-          ]
-        ]
+        "isIn": [["true", "false"]]
       }
     },
     "password": {
@@ -150,8 +203,22 @@
     "members_session_secret": {
       "defaultValue": null
     },
+    "members_email_auth_secret": {
+      "defaultValue": null
+    },
+    "default_content_visibility": {
+      "defaultValue": "public"
+    },
     "members_subscription_settings": {
-      "defaultValue": "{\"isPaid\":false,\"paymentProcessors\":[{\"adapter\":\"stripe\",\"config\":{\"secret_token\":\"\",\"public_token\":\"\",\"product\":{\"name\":\"Ghost Subscription\"},\"plans\":[{\"name\":\"Monthly\",\"currency\":\"usd\",\"interval\":\"month\",\"amount\":\"\"},{\"name\":\"Yearly\",\"currency\":\"usd\",\"interval\":\"year\",\"amount\":\"\"}]}}]}"
+      "defaultValue": "{\"fromAddress\":\"noreply\",\"allowSelfSignup\":true,\"paymentProcessors\":[{\"adapter\":\"stripe\",\"config\":{\"secret_token\":\"\",\"public_token\":\"\",\"product\":{\"name\":\"Ghost Subscription\"},\"plans\":[{\"name\":\"Monthly\",\"currency\":\"usd\",\"interval\":\"month\",\"amount\":\"\"},{\"name\":\"Yearly\",\"currency\":\"usd\",\"interval\":\"year\",\"amount\":\"\"}]}}]}"
+    },
+    "stripe_connect_integration": {
+      "defaultValue": "{}"
+    }
+  },
+  "bulk_email": {
+    "bulk_email_settings": {
+      "defaultValue": "{\"provider\":\"mailgun\", \"apiKey\": \"\", \"domain\": \"\", \"baseUrl\": \"\"}"
     }
   }
 }

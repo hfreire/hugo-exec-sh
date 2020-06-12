@@ -52,10 +52,10 @@ index 7eedfc7b8..917359069 100644
 
          res.removeListener('finish', logResponse);
 diff --git a/current/core/shared/logging.js b/current/core/shared/logging.js
-index e057e8166..8c4bac81b 100644
+index e057e8166..2b047d902 100644
 --- a/current/core/shared/logging.js
 +++ b/current/core/shared/logging.js
-@@ -1,15 +1,13 @@
+@@ -1,15 +1,15 @@
 -const config = require('./config');
 -const {logging} = require('ghost-ignition');
 +const Logger = require('modern-logger');
