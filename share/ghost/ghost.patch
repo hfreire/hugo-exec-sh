@@ -1,10 +1,10 @@
 diff --git a/current/core/server/web/parent/app.js b/current/core/server/web/parent/app.js
-index 199e8114d..4b9f75f81 100644
+index 199e8114d..34caab8ab 100644
 --- a/current/core/server/web/parent/app.js
 +++ b/current/core/server/web/parent/app.js
-@@ -71,6 +71,24 @@ module.exports = function setupParentApp(options = {}) {
-
-     parentApp.use(vhost(frontendVhostArg, frontendApp));
+@@ -13,6 +13,24 @@ module.exports = function setupParentApp(options = {}) {
+     debug('ParentApp setup start');
+     const parentApp = express('parent');
 
 +    // If we are behind a proxy that uses a non-standard forwarded proto header,
 +    // we should replace the X-Forwarded-Proto with its value
@@ -24,9 +24,9 @@ index 199e8114d..4b9f75f81 100644
 +        res.send({answer: 'pong'});
 +    });
 +
-     debug('ParentApp setup end');
+     parentApp.use(mw.requestId);
+     parentApp.use(mw.logRequest);
 
-     return parentApp;
 diff --git a/current/core/server/web/parent/middleware/log-request.js b/current/core/server/web/parent/middleware/log-request.js
 index 7eedfc7b8..917359069 100644
 --- a/current/core/server/web/parent/middleware/log-request.js
