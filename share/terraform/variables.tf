@@ -8,6 +8,9 @@ variable "infrastructure_name" {
   default = "antifragile-infrastructure"
 }
 
+variable "infrastructure_bucket" {
+}
+
 variable "docker_repo" {
 }
 

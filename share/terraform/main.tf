@@ -47,8 +47,9 @@ data "template_file" "container_definitions" {
 module "service" {
   source = "github.com/antifragile-systems/antifragile-service"
 
-  name       = var.name
-  aws_region = var.aws_region
+  infrastructure_bucket = var.infrastructure_bucket
+  name                  = var.name
+  aws_region            = var.aws_region
 
   service_desired_count = var.service_desired_count
 
