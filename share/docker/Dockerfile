@@ -1,11 +1,12 @@
-FROM ghost:3.21.1-alpine AS ghost
+FROM ghost:3.42.6-alpine AS ghost
 
 # Install utils
 RUN set -x \
   && apk --no-cache add \
     su-exec \
     curl \
-    netcat-openbsd
+    netcat-openbsd \
+    patch
 
 # Patch ghost code
 COPY --chown=node:node share/ghost/ghost.patch $GHOST_INSTALL/ghost.patch
@@ -24,7 +25,6 @@ RUN set -x \
 COPY --chown=node:node share/ghost/icon.png $GHOST_INSTALL/content.orig/images/2019/01/icon.png
 COPY --chown=node:node share/ghost/logo.png $GHOST_INSTALL/content.orig/images/2019/01/logo.png
 COPY --chown=node:node share/ghost/config.production.json $GHOST_INSTALL/config.production.json
-COPY --chown=node:node share/ghost/default-settings.json $GHOST_INSTALL/current/core/server/data/schema/default-settings.json
 
 FROM ghost AS build
 ARG NAME

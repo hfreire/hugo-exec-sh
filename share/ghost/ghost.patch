@@ -1,3 +1,24 @@
+diff --git a/current/core/server/services/webhooks/trigger.js b/current/core/server/services/webhooks/trigger.js
+index 0796aa789..c8cc6efde 100644
+--- a/current/core/server/services/webhooks/trigger.js
++++ b/current/core/server/services/webhooks/trigger.js
+@@ -82,6 +82,16 @@ module.exports = (event, model) => {
+                             retry: 5
+                         };
+
++                        const secret = webhook.get('secret');
++                        if (secret) {
++                            const timestamp = Date.now();
++                            opts.headers['X-Ghost-Signature'] = require('crypto')
++                                .createHmac('sha256', secret)
++                                .update(`${timestamp}.${reqPayload}`)
++                                .digest('hex');
++                            opts.headers['X-Ghost-Request-Timestamp'] = timestamp;
++                        }
++
+                         logging.info(`Triggering webhook for "${webhook.get('event')}" with url "${url}"`);
+
+                         request(url, opts)
 diff --git a/current/core/server/web/parent/app.js b/current/core/server/web/parent/app.js
 index 199e8114d..34caab8ab 100644
 --- a/current/core/server/web/parent/app.js
@@ -52,10 +73,10 @@ index 7eedfc7b8..917359069 100644
 
          res.removeListener('finish', logResponse);
 diff --git a/current/core/shared/logging.js b/current/core/shared/logging.js
-index e057e8166..2b047d902 100644
+index 63a9faaf9..2b047d902 100644
 --- a/current/core/shared/logging.js
 +++ b/current/core/shared/logging.js
-@@ -1,15 +1,15 @@
+@@ -1,16 +1,15 @@
 -const config = require('./config');
 -const {logging} = require('ghost-ignition');
 +const Logger = require('modern-logger');
@@ -70,6 +91,7 @@ index e057e8166..2b047d902 100644
 -    transports: config.get('logging:transports'),
 -    gelf: config.get('logging:gelf'),
 -    loggly: config.get('logging:loggly'),
+-    elasticsearch: config.get('logging:elasticsearch'),
 -    rotation: config.get('logging:rotation')
 +Logger.configure({
 +    transports: {
