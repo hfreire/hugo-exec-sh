@@ -1,5 +1,63 @@
+diff --git a/current/core/server/data/schema/default-settings.json b/current/core/server/data/schema/default-settings.json
+index 7c316ab05..c2f905539 100644
+--- a/current/core/server/data/schema/default-settings.json
++++ b/current/core/server/data/schema/default-settings.json
+@@ -55,7 +55,7 @@
+     },
+     "site": {
+         "title": {
+-            "defaultValue": "Ghost",
++            "defaultValue": "Hugo Freire",
+             "validations": {
+                 "isLength": {
+                     "max": 150
+@@ -75,7 +75,7 @@
+             "type": "string"
+         },
+         "logo": {
+-            "defaultValue": "",
++            "defaultValue": "/content/images/2019/01/logo.png",
+             "type": "string"
+         },
+         "cover_image": {
+@@ -83,7 +83,7 @@
+             "type": "string"
+         },
+         "icon": {
+-            "defaultValue": "",
++            "defaultValue": "/content/images/2019/01/icon.png",
+             "type": "string"
+         },
+         "accent_color": {
+@@ -102,7 +102,7 @@
+             "type": "string"
+         },
+         "timezone": {
+-            "defaultValue": "Etc/UTC",
++            "defaultValue": "Europe/Amsterdam",
+             "validations": {
+                 "isTimezone": true,
+                 "isEmpty": false
+@@ -110,7 +110,7 @@
+             "type": "string"
+         },
+         "codeinjection_head": {
+-            "defaultValue": "",
++            "defaultValue": "<!-- Google Analytics -->\n<script>\n  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){\n  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),\n  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)\n  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');\n\n  ga('create', 'UA-26338127-1', 'auto');\n  ga('send', 'pageview');\n\n</script>",
+             "type": "string"
+         },
+         "codeinjection_foot": {
+@@ -208,7 +208,7 @@
+     },
+     "theme": {
+         "active_theme": {
+-            "defaultValue": "casper",
++            "defaultValue": "hugo-exec-sh",
+             "flags": "RO",
+             "type": "string"
+         }
 diff --git a/current/core/server/services/webhooks/trigger.js b/current/core/server/services/webhooks/trigger.js
-index 0796aa789..c8cc6efde 100644
+index f10789143..0334cf60c 100644
 --- a/current/core/server/services/webhooks/trigger.js
 +++ b/current/core/server/services/webhooks/trigger.js
 @@ -82,6 +82,16 @@ module.exports = (event, model) => {
@@ -20,10 +78,10 @@ index 0796aa789..c8cc6efde 100644
 
                          request(url, opts)
 diff --git a/current/core/server/web/parent/app.js b/current/core/server/web/parent/app.js
-index 199e8114d..34caab8ab 100644
+index 6c5b22627..2604210c2 100644
 --- a/current/core/server/web/parent/app.js
 +++ b/current/core/server/web/parent/app.js
-@@ -13,6 +13,24 @@ module.exports = function setupParentApp(options = {}) {
+@@ -10,6 +10,24 @@ module.exports = function setupParentApp(options = {}) {
      debug('ParentApp setup start');
      const parentApp = express('parent');
 
@@ -49,7 +107,7 @@ index 199e8114d..34caab8ab 100644
      parentApp.use(mw.logRequest);
 
 diff --git a/current/core/server/web/parent/middleware/log-request.js b/current/core/server/web/parent/middleware/log-request.js
-index 7eedfc7b8..917359069 100644
+index 121b63d38..6e928aed3 100644
 --- a/current/core/server/web/parent/middleware/log-request.js
 +++ b/current/core/server/web/parent/middleware/log-request.js
 @@ -7,13 +7,15 @@ module.exports = function logRequest(req, res, next) {
@@ -72,16 +130,15 @@ index 7eedfc7b8..917359069 100644
          }
 
          res.removeListener('finish', logResponse);
-diff --git a/current/core/shared/logging.js b/current/core/shared/logging.js
-index 63a9faaf9..2b047d902 100644
---- a/current/core/shared/logging.js
-+++ b/current/core/shared/logging.js
-@@ -1,16 +1,15 @@
--const config = require('./config');
--const {logging} = require('ghost-ignition');
+diff --git a/current/loggingrc.js b/current/loggingrc.js
+index d3b64d848..2b047d902 100644
+--- a/current/loggingrc.js
++++ b/current/loggingrc.js
+@@ -1,15 +1,15 @@
+-const config = require('./core/shared/config');
 +const Logger = require('modern-logger');
 
--module.exports = logging({
+-module.exports = {
 -    name: config.get('logging:name'),
 -    env: config.get('env'),
 -    path: config.get('logging:path') || config.getContentPath('logs'),
@@ -93,6 +150,7 @@ index 63a9faaf9..2b047d902 100644
 -    loggly: config.get('logging:loggly'),
 -    elasticsearch: config.get('logging:elasticsearch'),
 -    rotation: config.get('logging:rotation')
+-};
 +Logger.configure({
 +    transports: {
 +        console: [
@@ -103,6 +161,6 @@ index 63a9faaf9..2b047d902 100644
 +        ]
 +    },
 +    enableEmoji: false
- });
++});
 +
 +module.exports = Logger;

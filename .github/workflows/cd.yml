@@ -22,7 +22,7 @@ jobs:
           ref: ${{ github.ref }}
       - uses: actions/setup-node@v1
         with:
-          node-version: 10.18
+          node-version: 14.18
       - uses: azure/docker-login@v1
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
