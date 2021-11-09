@@ -1,4 +1,4 @@
-FROM ghost:4.18.0-alpine AS ghost
+FROM ghost:4.22.0-alpine AS ghost
 
 # Install utils
 RUN set -x \
