@@ -27,7 +27,7 @@
     "eslint-plugin-standard": "5.0.0",
     "eslint-plugin-unicorn": "19.0.1",
     "gscan": "4.10.0",
-    "jest": "27.3.1",
+    "jest": "28.1.2",
     "npm-merge-driver": "2.3.6",
     "pre-git": "3.17.1",
     "semantic-release": "18.0.0",
